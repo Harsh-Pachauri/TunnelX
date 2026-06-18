@@ -1,0 +1,35 @@
+{
+  "name": "@tunnelx/gateway",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@tunnelx/db": "workspace:*",
+    "@tunnelx/protocol": "workspace:*",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "drizzle-orm": "^0.45.2",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
+    "nanoid": "^5.0.7",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.14.0",
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}

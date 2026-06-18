@@ -1,0 +1,38 @@
+# Local Docker Compose — use this to test the production Docker images on your machine.
+# For running the dev servers without Docker, see the Quick start in README.md.
+#
+# Usage:
+#   docker compose -f infra/docker-compose.yml up --build
+#   open http://localhost:5000   (dashboard)
+#   gateway API at http://localhost:4000
+
+services:
+  gateway:
+    build:
+      context: ..
+      dockerfile: apps/gateway/Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      BASE_DOMAIN: "localhost:4000"
+      DATABASE_URL: /data
+      DASHBOARD_ORIGIN: "http://localhost:5000"
+      JWT_SECRET: "dev-secret-not-for-production"
+      JWT_REFRESH_SECRET: "dev-refresh-secret-not-for-production"
+    volumes:
+      - gateway-data:/data
+
+  dashboard:
+    build:
+      context: ..
+      dockerfile: apps/dashboard/Dockerfile
+      args:
+        VITE_API_BASE_URL: "http://localhost:4000"
+    ports:
+      - "5000:80"
+    depends_on:
+      - gateway
+
+volumes:
+  gateway-data:

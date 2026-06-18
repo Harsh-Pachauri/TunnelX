@@ -1,0 +1,16 @@
+{
+  "name": "tunnelx",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.12.0",
+  "description": "Self-hosted localhost tunneling platform (ngrok/Cloudflare Tunnel clone)",
+  "scripts": {
+    "dev:gateway": "pnpm --filter @tunnelx/gateway dev",
+    "dev:cli": "pnpm --filter @tunnelx/cli dev",
+    "demo:app": "node examples/demo-app/server.js",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

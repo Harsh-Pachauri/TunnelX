@@ -1,0 +1,37 @@
+# Production Docker Compose — runs on the VPS behind Nginx.
+#
+# Usage:
+#   cp .env.example .env && $EDITOR .env   # fill in secrets + domain
+#   docker compose -f infra/docker-compose.prod.yml up --build -d
+#
+# Ports are bound to 127.0.0.1 only — Nginx on the VPS proxies them
+# to the public internet (see infra/nginx/tunnelx.conf).
+
+services:
+  gateway:
+    build:
+      context: ..
+      dockerfile: apps/gateway/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4000:4000"
+    env_file: ../.env
+    environment:
+      DATABASE_URL: /data
+    volumes:
+      - gateway-data:/data
+
+  dashboard:
+    build:
+      context: ..
+      dockerfile: apps/dashboard/Dockerfile
+      args:
+        VITE_API_BASE_URL: "${APP_URL:-https://app.yourdomain.dev}"
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5000:80"
+    depends_on:
+      - gateway
+
+volumes:
+  gateway-data:

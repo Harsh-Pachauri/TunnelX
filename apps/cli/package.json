@@ -1,0 +1,21 @@
+{
+  "name": "@tunnelx/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@tunnelx/protocol": "workspace:*",
+    "commander": "^12.1.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}
